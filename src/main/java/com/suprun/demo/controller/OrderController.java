@@ -1,6 +1,7 @@
 package com.suprun.demo.controller;
 
 import com.suprun.demo.domain.Order;
+import com.suprun.demo.dto.FullOrderRequest;
 import com.suprun.demo.service.OrderProcessingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,16 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order create(@RequestBody Order order) {
-        return service.createOrder(order);
+    public Order createFullOrder(@RequestBody FullOrderRequest request) {
+        return service.createFullOrder(
+                request.getOrder(),
+                request.getPayment(),
+                request.getInventoryItem()
+        );
     }
 
     @GetMapping
-    public List<Order> getAll() {
+    public List<Order> getAllOrders() {
         return service.getAllOrders();
     }
 }
