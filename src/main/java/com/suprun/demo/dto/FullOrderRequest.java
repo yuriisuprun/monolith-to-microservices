@@ -10,5 +10,6 @@ public class FullOrderRequest {
 
     private Order order;
     private Payment payment;
-    private InventoryItem inventoryItem;
+    private Long productId;
+    private Integer quantity;
 }
