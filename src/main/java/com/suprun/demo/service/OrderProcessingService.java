@@ -27,22 +27,23 @@ public class OrderProcessingService {
     }
 
     @Transactional
-    public Order createFullOrder(Order order, Payment payment, InventoryItem inventoryItem) {
+    public Order createOrder(Order order, Payment payment, Long productId, Integer quantity) {
+
+        InventoryItem inventory = inventoryRepository.findById(productId)
+                .orElseThrow(() ->
+                        new RuntimeException("Inventory item not found for id: " + productId));
+
+        if (inventory.getQuantity() < quantity) {
+            throw new RuntimeException("Insufficient inventory for product: " + inventory.getProductName());
+        }
 
         Order savedOrder = orderRepository.save(order);
 
         payment.setOrderId(savedOrder.getId());
         paymentRepository.save(payment);
 
-        InventoryItem item = inventoryRepository.findById(inventoryItem.getId())
-                .orElseThrow(() -> new RuntimeException("Inventory item not found"));
-
-        if (item.getQuantity() < inventoryItem.getQuantity()) {
-            throw new RuntimeException("Not enough inventory for product: " + item.getProductName());
-        }
-
-        item.setQuantity(item.getQuantity() - inventoryItem.getQuantity());
-        inventoryRepository.save(item);
+        inventory.setQuantity(inventory.getQuantity() - quantity);
+        inventoryRepository.save(inventory);
 
         return savedOrder;
     }
