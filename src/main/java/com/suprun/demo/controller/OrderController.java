@@ -22,11 +22,12 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createFullOrder(@RequestBody FullOrderRequest request) {
-        return service.createFullOrder(
+    public Order createOrder(@RequestBody FullOrderRequest request) {
+        return service.createOrder(
                 request.getOrder(),
                 request.getPayment(),
-                request.getInventoryItem()
+                request.getProductId(),
+                request.getQuantity()
         );
     }
 
