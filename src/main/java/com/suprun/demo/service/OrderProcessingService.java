@@ -9,16 +9,15 @@ import com.suprun.demo.repository.InventoryRepository;
 import com.suprun.demo.repository.OrderRepository;
 import com.suprun.demo.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class OrderProcessingService {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderProcessingService.class);
 
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
