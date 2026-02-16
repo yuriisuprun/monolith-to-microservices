@@ -3,6 +3,8 @@ package com.suprun.demo.service;
 import com.suprun.demo.domain.InventoryItem;
 import com.suprun.demo.domain.Order;
 import com.suprun.demo.domain.Payment;
+import com.suprun.demo.exception.InsufficientInventoryException;
+import com.suprun.demo.exception.ResourceNotFoundException;
 import com.suprun.demo.repository.InventoryRepository;
 import com.suprun.demo.repository.OrderRepository;
 import com.suprun.demo.repository.PaymentRepository;
@@ -30,11 +32,10 @@ public class OrderProcessingService {
     public Order createOrder(Order order, Payment payment, Long productId, Integer quantity) {
 
         InventoryItem inventory = inventoryRepository.findById(productId)
-                .orElseThrow(() ->
-                        new RuntimeException("Inventory item not found for id: " + productId));
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory item not found for id: " + productId));
 
         if (inventory.getQuantity() < quantity) {
-            throw new RuntimeException("Insufficient inventory for product: " + inventory.getProductName());
+            throw new InsufficientInventoryException("Insufficient inventory for product: " + inventory.getProductName());
         }
 
         Order savedOrder = orderRepository.save(order);
