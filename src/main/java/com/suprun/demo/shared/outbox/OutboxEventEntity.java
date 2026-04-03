@@ -36,9 +36,6 @@ public class OutboxEventEntity {
 
     private Instant publishedAt;
 
-    protected OutboxEventEntity() {
-    }
-
     public OutboxEventEntity(
             Long id,
             String eventType,
