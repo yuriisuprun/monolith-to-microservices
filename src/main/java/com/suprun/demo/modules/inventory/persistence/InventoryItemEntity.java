@@ -23,9 +23,6 @@ public class InventoryItemEntity {
     @Column(nullable = false)
     private Integer quantity;
 
-    protected InventoryItemEntity() {
-    }
-
     public InventoryItemEntity(Long id, String productName, Integer quantity) {
         this.id = id;
         this.productName = productName;
