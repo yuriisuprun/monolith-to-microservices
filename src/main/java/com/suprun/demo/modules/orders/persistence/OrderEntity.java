@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
+@Getter
 @Entity
 @Table(name = "orders")
 public class OrderEntity {
@@ -32,15 +34,4 @@ public class OrderEntity {
         this.totalAmount = totalAmount;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
 }
