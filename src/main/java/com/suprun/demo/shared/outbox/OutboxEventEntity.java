@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 import java.time.Instant;
 
+@Getter
 @Entity
 @Table(name = "outbox_event")
 public class OutboxEventEntity {
@@ -53,34 +55,6 @@ public class OutboxEventEntity {
         this.payload = payload;
         this.occurredAt = occurredAt;
         this.publishedAt = publishedAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public String getAggregateType() {
-        return aggregateType;
-    }
-
-    public String getAggregateId() {
-        return aggregateId;
-    }
-
-    public String getPayload() {
-        return payload;
-    }
-
-    public Instant getOccurredAt() {
-        return occurredAt;
-    }
-
-    public Instant getPublishedAt() {
-        return publishedAt;
     }
 
     public void markPublished(Instant publishedAt) {
