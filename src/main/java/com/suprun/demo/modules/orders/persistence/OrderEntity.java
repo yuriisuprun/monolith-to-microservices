@@ -25,9 +25,6 @@ public class OrderEntity {
     @Column(precision = 19, scale = 2, nullable = false)
     private BigDecimal totalAmount;
 
-    protected OrderEntity() {
-    }
-
     public OrderEntity(Long id, String customerName, BigDecimal totalAmount) {
         this.id = id;
         this.customerName = customerName;

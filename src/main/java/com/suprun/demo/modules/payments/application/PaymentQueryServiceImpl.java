@@ -1,6 +1,7 @@
 package com.suprun.demo.modules.payments.application;
 
 import com.suprun.demo.modules.payments.api.PaymentQueryService;
+import com.suprun.demo.modules.payments.persistence.PaymentEntity;
 import com.suprun.demo.modules.payments.persistence.PaymentJpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class PaymentQueryServiceImpl implements PaymentQueryService {
 
     @Override
     public Optional<String> findStatusForOrder(long orderId) {
-        return repo.findFirstByOrderId(orderId).map(p -> p.getStatus());
+        return repo.findFirstByOrderId(orderId).map(PaymentEntity::getStatus);
     }
 }
 
