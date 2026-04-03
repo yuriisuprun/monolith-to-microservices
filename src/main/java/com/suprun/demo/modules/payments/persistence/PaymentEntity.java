@@ -23,9 +23,6 @@ public class PaymentEntity {
     @Column(nullable = false)
     private String status;
 
-    protected PaymentEntity() {
-    }
-
     public PaymentEntity(Long id, Long orderId, String status) {
         this.id = id;
         this.orderId = orderId;
