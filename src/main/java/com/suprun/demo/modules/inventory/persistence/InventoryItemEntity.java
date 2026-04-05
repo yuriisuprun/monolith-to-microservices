@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -20,6 +21,7 @@ public class InventoryItemEntity {
     @Column(nullable = false)
     private String productName;
 
+    @Setter
     @Column(nullable = false)
     private Integer quantity;
 
@@ -29,7 +31,4 @@ public class InventoryItemEntity {
         this.quantity = quantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }
